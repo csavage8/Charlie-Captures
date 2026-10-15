@@ -3,503 +3,501 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Charlie's Lens | Terminal Portfolio</title>
+  <title>Through Charlie's Lens | Photography Journey</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              gold: '#f59e0b',
+              dark: '#0f0f12',
+              card: '#18181c',
+              border: '#2a2a32'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* RESET & BASE MATRIX/TERMINAL STYLES */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    html {
+      scroll-behavior: smooth;
     }
 
-    body {
-      font-family: 'Fira Code', 'Courier New', Courier, monospace;
-      background-color: #0d1117;
-      color: #00ff66;
-      line-height: 1.6;
-      padding-bottom: 60px;
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+    ::-webkit-scrollbar-track {
+      background: #0f0f12;
     }
-
-    /* NAVIGATION BAR */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 8%;
-      background-color: rgba(13, 17, 23, 0.95);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #21262d;
-    }
-
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .logo span {
-      color: #00ff66;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: #8b949e;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #00ff66;
-    }
-
-    .admin-btn {
-      border: 1px solid #00ff66;
-      color: #00ff66 !important;
-      padding: 4px 12px;
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a32;
       border-radius: 4px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f59e0b;
     }
 
-    .admin-btn:hover {
-      background-color: #00ff66;
-      color: #0d1117 !important;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      padding: 60px 20px 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      border-bottom: 1px dashed #30363d;
-    }
-
-    .terminal-prompt {
-      color: #8b949e;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-    }
-
-    .terminal-prompt span {
-      color: #58a6ff;
-    }
-
-    .hero h1 {
-      font-size: 2.2rem;
-      color: #ffffff;
-      margin-bottom: 15px;
-      letter-spacing: -0.5px;
-    }
-
-    .hero p {
-      font-size: 0.95rem;
-      color: #8b949e;
-      background-color: #161b22;
-      padding: 15px;
-      border-radius: 6px;
-      border-left: 3px solid #00ff66;
-    }
-
-    /* CATEGORY FILTER */
-    .filter-container {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 40px 0 30px;
-      flex-wrap: wrap;
-      padding: 0 20px;
-    }
-
-    .filter-btn {
-      background-color: #161b22;
-      color: #8b949e;
-      border: 1px solid #30363d;
-      padding: 6px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.85rem;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background-color: #00ff66;
-      color: #0d1117;
-      border-color: #00ff66;
-      font-weight: 700;
-    }
-
-    /* GALLERY GRID */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .photo-card {
-      background-color: #161b22;
-      border-radius: 6px;
+    .img-hover-container {
       overflow: hidden;
-      border: 1px solid #30363d;
-      transition: transform 0.2s, border-color 0.2s;
     }
-
-    .photo-card:hover {
-      transform: translateY(-4px);
-      border-color: #00ff66;
+    .img-hover-container img {
+      transition: transform 0.5s ease;
     }
-
-    .photo-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid #21262d;
-    }
-
-    .photo-info {
-      padding: 15px;
-    }
-
-    .photo-title {
-      font-size: 1rem;
-      color: #ffffff;
-      margin-bottom: 5px;
-    }
-
-    .photo-meta {
-      font-size: 0.8rem;
-      color: #8b949e;
-    }
-
-    .tag {
-      display: inline-block;
-      background-color: #21262d;
-      color: #58a6ff;
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 3px;
-      margin-top: 10px;
-    }
-
-    /* GEAR SECTION */
-    .gear-section {
-      max-width: 1000px;
-      margin: 70px auto 0;
-      padding: 0 20px;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      color: #ffffff;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .gear-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
-
-    .gear-card {
-      background-color: #161b22;
-      padding: 18px;
-      border-radius: 6px;
-      border: 1px solid #30363d;
-    }
-
-    .gear-card h3 {
-      font-size: 0.95rem;
-      color: #00ff66;
-      margin-bottom: 5px;
-    }
-
-    .gear-card p {
-      color: #8b949e;
-      font-size: 0.85rem;
-    }
-
-    /* ADMIN PANEL MODAL */
-    .admin-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.85);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .admin-content {
-      background-color: #161b22;
-      border: 1px solid #00ff66;
-      border-radius: 6px;
-      width: 100%;
-      max-width: 480px;
-      padding: 25px;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.2rem;
-      color: #8b949e;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      color: #ff7b72;
-    }
-
-    .admin-form label {
-      display: block;
-      font-size: 0.8rem;
-      color: #8b949e;
-      margin-top: 15px;
-      margin-bottom: 5px;
-    }
-
-    .admin-form input, .admin-form select {
-      width: 100%;
-      padding: 8px 12px;
-      background-color: #0d1117;
-      border: 1px solid #30363d;
-      border-radius: 4px;
-      color: #00ff66;
-      font-family: inherit;
-      font-size: 0.85rem;
-    }
-
-    .admin-form input:focus, .admin-form select:focus {
-      outline: none;
-      border-color: #00ff66;
-    }
-
-    .admin-form button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #00ff66;
-      color: #0d1117;
-      border: none;
-      border-radius: 4px;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      margin-top: 70px;
-      color: #484f58;
-      font-size: 0.8rem;
+    .img-hover-container:hover img {
+      transform: scale(1.05);
     }
   </style>
 </head>
-<body>
+<body class="bg-brand-dark text-gray-200 font-sans antialiased selection:bg-brand-gold selection:text-black">
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="logo">charlie<span>@portfolio:~$</span></div>
-    <ul class="nav-links">
-      <li><a href="#gallery">./gallery</a></li>
-      <li><a href="#gear">./gear</a></li>
-      <li><a class="admin-btn" onclick="openAdmin()">[+] add_photo</a></li>
-    </ul>
+  <!-- NAVIGATION BAR -->
+  <nav class="fixed top-0 left-0 w-full z-40 bg-brand-dark/90 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo / Name -->
+        <a href="#" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center text-brand-gold">
+            <i class="fa-solid fa-camera text-lg"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-wider text-white block">CHARLIE'S LENS</span>
+            <span class="text-[10px] tracking-widest text-gray-400 uppercase block -mt-1">Visual Anthology</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+          <a href="#gallery" class="hover:text-brand-gold transition-colors">GALLERY</a>
+          <a href="#journey" class="hover:text-brand-gold transition-colors">MY JOURNEY</a>
+          <a href="#gear" class="hover:text-brand-gold transition-colors">MY GEAR</a>
+          <button onclick="openAdmin()" class="px-5 py-2 rounded-full bg-brand-gold text-black font-semibold hover:bg-amber-400 transition-all flex items-center space-x-2">
+            <i class="fa-solid fa-plus text-xs"></i>
+            <span>ADD PHOTO</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center space-x-3">
+          <button onclick="openAdmin()" class="px-3 py-1.5 rounded-full bg-brand-gold text-black text-xs font-semibold">
+            + ADD
+          </button>
+          <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 py-4 space-y-3">
+      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-gold">GALLERY</a>
+      <a href="#journey" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-gold">MY JOURNEY</a>
+      <a href="#gear" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-gold">MY GEAR</a>
+    </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="terminal-prompt"><span>charlie@dev-machine</span>:~$ cat bio.txt</div>
-    <h1>Charlie's Lens</h1>
-    <p>Welcome to my photography portfolio! I'm Charlie, a passionate photographer capturing the world through my lens. From breathtaking landscapes and vibrant urban streets to intimate portraits, this site tracks my evolving visual journey. Explore my gallery, dive into my camera gear setup, and follow my story as I turn moments into memories.</p>
-  </section>
+  <!-- HERO / BANNER SECTION -->
+  <section class="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-  <!-- CATEGORY FILTERS -->
-  <div class="filter-container" id="gallery">
-    <button class="filter-btn active" onclick="filterGallery('all')">all_shots</button>
-    <button class="filter-btn" onclick="filterGallery('landscape')">landscapes</button>
-    <button class="filter-btn" onclick="filterGallery('urban')">urban_street</button>
-    <button class="filter-btn" onclick="filterGallery('portrait')">portraits</button>
-  </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      
+      <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 mb-6">
+        <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+        <span class="text-xs font-mono uppercase tracking-widest text-brand-gold">Photography Portfolio & Journey</span>
+      </div>
 
-  <!-- GALLERY GRID -->
-  <main class="gallery" id="galleryGrid">
-    <!-- Photos render dynamically here -->
-  </main>
+      <h1 class="text-5xl sm:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
+        Capturing Light, <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-brand-gold to-amber-600">
+          Telling Stories.
+        </span>
+      </h1>
 
-  <!-- GEAR SECTION -->
-  <section class="gear-section" id="gear">
-    <h2 class="section-title">system_hardware.cfg</h2>
-    <div class="gear-grid">
-      <div class="gear-card">
-        <h3>[Primary Camera]</h3>
-        <p>Mirrorless Full-Frame Sensor</p>
+      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        Hi, I'm <strong class="text-white">Charlie</strong>. Welcome to my visual diary where I document landscapes, street moments, portraits, and my evolving photographic journey.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#gallery" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold text-black font-semibold hover:bg-amber-400 transition-all flex items-center justify-center space-x-2 shadow-lg shadow-brand-gold/20">
+          <span>VIEW GALLERY</span>
+          <i class="fa-solid fa-arrow-down text-sm"></i>
+        </a>
+        <a href="#journey" class="w-full sm:w-auto px-8 py-4 rounded-full border border-brand-border text-white font-medium hover:border-brand-gold hover:text-brand-gold transition-all">
+          READ MY STORY
+        </a>
       </div>
-      <div class="gear-card">
-        <h3>[35mm Lens]</h3>
-        <p>f/1.8 Prime — Street & Wide Shots</p>
-      </div>
-      <div class="gear-card">
-        <h3>[50mm Lens]</h3>
-        <p>f/1.4 Prime — Portraits & Bokeh</p>
-      </div>
-      <div class="gear-card">
-        <h3>[Accessories]</h3>
-        <p>Carbon Tripod, ND Filters, Peak Strap</p>
-      </div>
+
     </div>
   </section>
 
+  <!-- GALLERY SECTION -->
+  <section id="gallery" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <span class="text-xs font-mono text-brand-gold uppercase tracking-widest block mb-2">Portfolio</span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-white">Featured Work</h2>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+        <button onclick="filterCategory('all')" class="filter-btn active px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase border border-brand-gold bg-brand-gold text-black font-semibold transition-all">All</button>
+        <button onclick="filterCategory('landscape')" class="filter-btn px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase border border-brand-border text-gray-400 hover:border-brand-gold hover:text-white transition-all">Landscape</button>
+        <button onclick="filterCategory('street')" class="filter-btn px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase border border-brand-border text-gray-400 hover:border-brand-gold hover:text-white transition-all">Street</button>
+        <button onclick="filterCategory('portrait')" class="filter-btn px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase border border-brand-border text-gray-400 hover:border-brand-gold hover:text-white transition-all">Portrait</button>
+      </div>
+    </div>
+
+    <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+  </section>
+
+  <!-- PHOTOGRAPHY JOURNEY SECTION -->
+  <section id="journey" class="py-24 bg-brand-card border-y border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono text-brand-gold uppercase tracking-widest block mb-2">Milestones</span>
+        <h2 class="text-4xl font-bold text-white mb-4">My Photographic Journey</h2>
+        <p class="text-gray-400">How I got started, what I've learned, and where I'm heading next.</p>
+      </div>
+
+      <div class="relative border-l-2 border-brand-border ml-4 md:ml-32 space-y-12">
+
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-gold border-4 border-brand-dark"></div>
+          <span class="md:absolute md:-left-28 md:top-1 font-mono text-brand-gold font-bold text-sm block mb-1">PRESENT</span>
+          <div class="bg-brand-dark p-6 rounded-2xl border border-brand-border">
+            <h3 class="text-xl font-bold text-white mb-2">Finding My Style & Portfolio Building</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Focusing on dramatic natural lighting, travel photography, and refining my manual editing techniques to create cohesive visual stories.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-gold/60 border-4 border-brand-dark"></div>
+          <span class="md:absolute md:-left-28 md:top-1 font-mono text-brand-gold font-bold text-sm block mb-1">STEP 2</span>
+          <div class="bg-brand-dark p-6 rounded-2xl border border-brand-border">
+            <h3 class="text-xl font-bold text-white mb-2">Learning Manual Mode & Composition</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Mastering the exposure triangle (Aperture, Shutter Speed, ISO) and studying composition rules like the Rule of Thirds and leading lines.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative pl-8 md:pl-12">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-gold/30 border-4 border-brand-dark"></div>
+          <span class="md:absolute md:-left-28 md:top-1 font-mono text-brand-gold font-bold text-sm block mb-1">STEP 1</span>
+          <div class="bg-brand-dark p-6 rounded-2xl border border-brand-border">
+            <h3 class="text-xl font-bold text-white mb-2">The Spark & First Camera</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Picked up my first camera and fell in love with capturing everyday surroundings, weekend trips, and family moments.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GEAR SECTION -->
+  <section id="gear" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="mb-12">
+      <span class="text-xs font-mono text-brand-gold uppercase tracking-widest block mb-2">Equipment</span>
+      <h2 class="text-4xl font-bold text-white">What's In My Bag</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+        <span class="text-[10px] font-mono text-brand-gold uppercase tracking-widest block mb-1">MAIN BODY</span>
+        <h3 class="text-lg font-bold text-white mb-1">Digital Camera Body</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">Primary setup for landscapes, everyday street photography, and fast shots.</p>
+      </div>
+
+      <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
+          <i class="fa-solid fa-circle-notch"></i>
+        </div>
+        <span class="text-[10px] font-mono text-brand-gold uppercase tracking-widest block mb-1">PRIME LENS</span>
+        <h3 class="text-lg font-bold text-white mb-1">50mm f/1.8 Lens</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">Great for sharp portraits, blurry background bokeh, and low-light photography.</p>
+      </div>
+
+      <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
+          <i class="fa-solid fa-mountain"></i>
+        </div>
+        <span class="text-[10px] font-mono text-brand-gold uppercase tracking-widest block mb-1">WIDE LENS</span>
+        <h3 class="text-lg font-bold text-white mb-1">Wide-Angle Zoom</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">Ideal for sweeping mountain vistas, city skyline views, and architecture.</p>
+      </div>
+
+      <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <span class="text-[10px] font-mono text-brand-gold uppercase tracking-widest block mb-1">ACCESSORIES</span>
+        <h3 class="text-lg font-bold text-white mb-1">Tripod & ND Filters</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">Sturdy support for silky-smooth waterfall long exposure shots and sunset photography.</p>
+      </div>
+
+    </div>
+
+  </section>
+
   <!-- ADMIN ADD PHOTO MODAL -->
-  <div class="admin-modal" id="adminModal">
-    <div class="admin-content">
-      <span class="close-btn" onclick="closeAdmin()">[x]</span>
-      <h2 style="color: #ffffff; font-size: 1.1rem;">sudo ./add_photo.sh</h2>
-      <p style="color: #8b949e; font-size: 0.8rem; margin-top: 4px;">Authenticated admin session active.</p>
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="max-w-lg w-full bg-brand-card border border-brand-border rounded-2xl p-6 relative">
+      <button onclick="closeAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <span class="text-xs font-mono text-brand-gold uppercase tracking-widest block mb-1">Admin Panel</span>
+      <h3 class="text-2xl font-bold text-white mb-4">Add New Photo</h3>
 
-      <form class="admin-form" onsubmit="addPhoto(event)">
-        <label>PHOTO_TITLE</label>
-        <input type="text" id="photoTitle" placeholder="e.g., Midnight Neon" required>
+      <form onsubmit="addPhoto(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono text-gray-400 mb-1">PHOTO TITLE</label>
+          <input type="text" id="admin-title" required placeholder="e.g., Mountain Sunrise" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand-gold transition-colors">
+        </div>
+        
+        <div>
+          <label class="block text-xs font-mono text-gray-400 mb-1">CATEGORY</label>
+          <select id="admin-category" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand-gold transition-colors">
+            <option value="landscape">Landscape</option>
+            <option value="street">Street</option>
+            <option value="portrait">Portrait</option>
+          </select>
+        </div>
 
-        <label>IMAGE_PATH_OR_URL</label>
-        <input type="text" id="photoUrl" placeholder="e.g., images/myphoto.jpg" required>
+        <div>
+          <label class="block text-xs font-mono text-gray-400 mb-1">IMAGE URL OR PATH</label>
+          <input type="text" id="admin-image" required placeholder="e.g., images/photo.jpg" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand-gold transition-colors">
+        </div>
 
-        <label>METADATA_DETAILS</label>
-        <input type="text" id="photoMeta" placeholder="e.g., London • Shot on 35mm" required>
+        <div>
+          <label class="block text-xs font-mono text-gray-400 mb-1">DESCRIPTION</label>
+          <textarea id="admin-desc" rows="2" required placeholder="Short details about the shot..." class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
+        </div>
 
-        <label>CATEGORY_TAG</label>
-        <select id="photoCategory">
-          <option value="landscape">landscape</option>
-          <option value="urban">urban</option>
-          <option value="portrait">portrait</option>
-        </select>
-
-        <button type="submit">EXECUTE: ADD_PHOTO</button>
+        <button type="submit" class="w-full py-3 rounded-xl bg-brand-gold text-black font-bold hover:bg-amber-400 transition-all">
+          ADD TO GALLERY
+        </button>
       </form>
     </div>
   </div>
 
-  <footer>
-    <p>-- EOF -- &copy; 2026 Charlie's Lens. Hosted on GitHub Pages.</p>
+  <!-- LIGHTBOX POPUP MODAL -->
+  <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="max-w-4xl w-full bg-brand-card border border-brand-border rounded-2xl overflow-hidden shadow-2xl">
+      <img id="lightbox-img" src="" alt="" class="w-full max-h-[70vh] object-contain bg-black">
+      <div class="p-6">
+        <span id="lightbox-tag" class="text-xs font-mono text-brand-gold uppercase tracking-widest block mb-1">Category</span>
+        <h3 id="lightbox-title" class="text-2xl font-bold text-white mb-2">Photo Title</h3>
+        <p id="lightbox-desc" class="text-sm text-gray-400">Photo description details go here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-12 bg-brand-dark border-t border-brand-border text-center text-xs text-gray-500 font-mono">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 Charlie's Lens. All rights reserved.</p>
+      <div class="flex space-x-6 text-lg text-gray-400">
+        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-unsplash"></i></a>
+      </div>
+    </div>
   </footer>
 
+  <!-- JAVASCRIPT CODE -->
   <script>
-    // PASSCODE SECURITY (CHANGE THIS PASSWORD IF YOU WANT)
-    const ADMIN_PASSWORD = "Readingfc1871!";
+    // PASSCODE SECURITY (Change this password if you want)
+    const ADMIN_PASSWORD = "charliephoto123";
 
-    // PHOTO ARRAY
-    let photos = [
+    const myPhotos = [
       {
-        title: "Alpine Horizons",
-        meta: "Swiss Alps • Golden Hour",
+        id: 1,
+        title: "Alpine Lake Reflection",
         category: "landscape",
-        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+        description: "Early morning reflection shot high up in the mountain trail."
       },
       {
-        title: "Neon Rain",
-        meta: "Tokyo, Japan • Night Long Exposure",
-        category: "urban",
-        url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80"
+        id: 2,
+        title: "City Lights Rain",
+        category: "street",
+        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop",
+        description: "Neon reflections captured during a late evening downpour."
       },
       {
-        title: "Golden Hour Glow",
-        meta: "Studio Session • 50mm Prime",
+        id: 3,
+        title: "Golden Hour Portrait",
         category: "portrait",
-        url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
+        description: "Warm sunset portrait taken using natural window light."
+      },
+      {
+        id: 4,
+        title: "Misty Pine Forest",
+        category: "landscape",
+        image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+        description: "Fog rolling through the forest trees right after dawn."
+      },
+      {
+        id: 5,
+        title: "Urban Geometry",
+        category: "street",
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+        description: "Low-angle architectural perspective highlighting shadows and symmetry."
+      },
+      {
+        id: 6,
+        title: "Northern Sky Glow",
+        category: "landscape",
+        image: "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1200&auto=format&fit=crop",
+        description: "Night skies lit up over cold northern mountains."
       }
     ];
 
-    // RENDER GALLERY
-    function renderGallery(filter = 'all') {
-      const gallery = document.getElementById('galleryGrid');
-      gallery.innerHTML = '';
+    // RENDER GALLERY TO PAGE
+    function displayGallery(photos) {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
 
-      const filteredPhotos = filter === 'all' 
-        ? photos 
-        : photos.filter(p => p.category === filter);
-
-      filteredPhotos.forEach(photo => {
+      photos.forEach(photo => {
         const card = document.createElement('div');
-        card.className = 'photo-card';
+        card.className = 'bg-brand-card border border-brand-border rounded-2xl overflow-hidden img-hover-container cursor-pointer hover:border-brand-gold/40 transition-all';
+        card.onclick = () => openLightbox(photo);
+
         card.innerHTML = `
-          <img src="${photo.url}" alt="${photo.title}">
-          <div class="photo-info">
-            <div class="photo-title">${photo.title}</div>
-            <div class="photo-meta">${photo.meta}</div>
-            <span class="tag">#${photo.category}</span>
+          <div class="h-64 bg-black overflow-hidden relative">
+            <img src="${photo.image}" alt="${photo.title}" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-mono px-2.5 py-1 rounded border border-brand-gold/20 uppercase tracking-widest">
+              ${photo.category}
+            </span>
+          </div>
+          <div class="p-5 flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-white text-lg">${photo.title}</h3>
+              <p class="text-xs text-gray-400 mt-1">${photo.description}</p>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-brand-dark flex items-center justify-center text-gray-400">
+              <i class="fa-solid fa-expand text-xs"></i>
+            </div>
           </div>
         `;
-        gallery.appendChild(card);
+        grid.appendChild(card);
       });
     }
 
-    // FILTER GALLERY
-    function filterGallery(category) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderGallery(category);
+    // FILTER GALLERY BY CATEGORY
+    function filterCategory(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-brand-gold', 'text-black', 'border-brand-gold', 'font-semibold');
+        btn.classList.add('border-brand-border', 'text-gray-400');
+      });
+
+      event.target.classList.add('bg-brand-gold', 'text-black', 'border-brand-gold', 'font-semibold');
+      event.target.classList.remove('border-brand-border', 'text-gray-400');
+
+      if (category === 'all') {
+        displayGallery(myPhotos);
+      } else {
+        const filtered = myPhotos.filter(item => item.category === category);
+        displayGallery(filtered);
+      }
     }
 
-    // AUTHENTICATED ADMIN ACCESS
+    // AUTHENTICATED ADMIN FUNCTIONS
     function openAdmin() {
-      const pass = prompt("AUTHENTICATION REQUIRED\nEnter Admin Password:");
+      const pass = prompt("Enter Admin Password:");
       if (pass === ADMIN_PASSWORD) {
-        document.getElementById('adminModal').style.display = 'flex';
+        document.getElementById('admin-modal').classList.remove('hidden');
       } else if (pass !== null) {
-        alert("ACCESS DENIED: Invalid Password");
+        alert("Incorrect Password!");
       }
     }
 
     function closeAdmin() {
-      document.getElementById('adminModal').style.display = 'none';
+      document.getElementById('admin-modal').classList.add('hidden');
     }
 
-    // ADD NEW PHOTO
     function addPhoto(e) {
       e.preventDefault();
       
       const newPhoto = {
-        title: document.getElementById('photoTitle').value,
-        url: document.getElementById('photoUrl').value,
-        meta: document.getElementById('photoMeta').value,
-        category: document.getElementById('photoCategory').value
+        id: Date.now(),
+        title: document.getElementById('admin-title').value,
+        category: document.getElementById('admin-category').value,
+        image: document.getElementById('admin-image').value,
+        description: document.getElementById('admin-desc').value
       };
 
-      photos.unshift(newPhoto);
-      renderGallery('all');
+      myPhotos.unshift(newPhoto);
+      displayGallery(myPhotos);
       closeAdmin();
       e.target.reset();
     }
 
+    // LIGHTBOX FUNCTIONS
+    function openLightbox(photo) {
+      document.getElementById('lightbox-img').src = photo.image;
+      document.getElementById('lightbox-tag').innerText = photo.category;
+      document.getElementById('lightbox-title').innerText = photo.title;
+      document.getElementById('lightbox-desc').innerText = photo.description;
+
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+
+    // MOBILE MENU TOGGLE
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
     // INITIAL LOAD
-    renderGallery();
+    window.onload = function() {
+      displayGallery(myPhotos);
+    };
   </script>
+
 </body>
 </html>
