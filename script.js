@@ -3,14 +3,13 @@
    ========================================================================== */
 
 // 1. MASTER PHOTO DATASET
-// Line 11: Add your edited photo in 'image' and raw/original in 'beforeImage'
 const myPhotos = [
   {
     id: 1,
     title: "Alpine Lake Reflection",
     category: "landscape",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
-    beforeImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop&sat=-100", // Example unedited image
+    beforeImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop&sat=-100",
     description: "Early morning reflection shot. Slide to compare the raw capture vs color-graded final."
   },
   {
@@ -34,7 +33,7 @@ const myPhotos = [
     title: "Misty Pine Forest",
     category: "landscape",
     image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
-    beforeImage: "", // Leave blank if you don't have an unedited version
+    beforeImage: "",
     description: "Fog rolling through the forest trees right after dawn."
   }
 ];
@@ -106,6 +105,7 @@ function openLightbox(photo) {
   const labelBefore = document.getElementById('label-before');
   const labelAfter = document.getElementById('label-after');
   const sliderInput = document.getElementById('slider-range');
+  const wrapper = document.getElementById('slider-wrapper');
 
   editedImg.src = photo.image;
   
@@ -116,6 +116,15 @@ function openLightbox(photo) {
     labelBefore.style.display = 'block';
     labelAfter.innerText = 'EDITED';
     sliderInput.disabled = false;
+    
+    // Sync dimensions so overlay image matches base image exactly
+    setTimeout(() => {
+      if (wrapper && beforeImg) {
+        beforeImg.style.width = wrapper.offsetWidth + 'px';
+        beforeImg.style.height = wrapper.offsetHeight + 'px';
+      }
+    }, 50);
+
     updateSlider(50);
   } else {
     beforeOverlay.style.display = 'none';
