@@ -6,7 +6,7 @@
 const ADMIN_PASSWORD = "Readingfc1871";
 
 // 2. MASTER PHOTO DATASET
-// To add new photos, add a new block inside this array with the image path
+// Line 11: Add your photo details here using the image paths uploaded to GitHub
 const myPhotos = [
   {
     id: 1,
