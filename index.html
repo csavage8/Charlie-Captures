@@ -172,7 +172,7 @@
     <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- BOOKING SECTION -->
+  <!-- BOOKING SECTION (WEB3FORMS INTEGRATED) -->
   <section id="book" class="py-24 bg-brand-card border-y border-brand-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -182,10 +182,13 @@
         <p class="text-gray-400">Work with the best photographer in Reading for your portraits, events, or creative projects.</p>
       </div>
 
-      <!-- FORM -->
-      <!-- Replace 'YOUR_FORMSPREE_ID' with your Formspree endpoint ID -->
-      <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="bg-brand-dark p-8 rounded-2xl border border-brand-border space-y-6">
+      <!-- WEB3FORMS BOOKING FORM -->
+      <form action="https://api.web3forms.com/submit" method="POST" class="bg-brand-dark p-8 rounded-2xl border border-brand-border space-y-6">
         
+        <!-- WEB3FORMS ACCESS KEY -->
+        <input type="hidden" name="access_key" value="203172b3-5b9a-4ca2-bdf4-506397543b0d">
+        <input type="hidden" name="subject" value="New Booking Request - Charlie's Lens">
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs font-mono text-gray-400 mb-2">YOUR NAME *</label>
