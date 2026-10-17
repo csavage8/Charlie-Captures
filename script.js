@@ -6,6 +6,14 @@
 const myPhotos = [
   {
     id: 1,
+    title: "Canada Goose at the River",
+    category: "nature",
+    image: "images/DSC_2500.jpg",
+    beforeImage: "images/DSC_2500.jpg",
+    description: "Close-up portrait of a Canada Goose gliding along the water, captured locally in Berkshire."
+  },
+  {
+    id: 2,
     title: "Alpine Lake Reflection",
     category: "landscape",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
@@ -13,7 +21,7 @@ const myPhotos = [
     description: "Early morning reflection shot. Slide to compare the raw capture vs color-graded final."
   },
   {
-    id: 2,
+    id: 3,
     title: "City Lights Rain",
     category: "street",
     image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop",
@@ -21,20 +29,12 @@ const myPhotos = [
     description: "Neon reflections captured during a late evening downpour."
   },
   {
-    id: 3,
+    id: 4,
     title: "Golden Hour Portrait",
     category: "portrait",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
     beforeImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop&sat=-80",
     description: "Warm sunset portrait taken using natural window light."
-  },
-  {
-    id: 4,
-    title: "Misty Pine Forest",
-    category: "landscape",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
-    beforeImage: "",
-    description: "Fog rolling through the forest trees right after dawn."
   }
 ];
 
@@ -117,7 +117,6 @@ function openLightbox(photo) {
     labelAfter.innerText = 'EDITED';
     sliderInput.disabled = false;
     
-    // Sync dimensions so overlay image matches base image exactly
     setTimeout(() => {
       if (wrapper && beforeImg) {
         beforeImg.style.width = wrapper.offsetWidth + 'px';
