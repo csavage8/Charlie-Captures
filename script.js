@@ -1,16 +1,16 @@
 /* ==========================================================================
-   CHARLIE'S LENS - GALLERY MANAGEMENT & BEFORE/AFTER SLIDER SCRIPT
+   CHARLIE'S LENS - GALLERY MANAGEMENT & ALBUMS SCRIPT
    ========================================================================== */
 
 // 1. MASTER PHOTO DATASET
 const myPhotos = [
   {
     id: 1,
-    title: "Canada Goose at the River",
+    title: "Nature & Wildlife Album",
     category: "nature",
     image: "images/DSC_2500.jpg",
     beforeImage: "images/DSC_2500.jpg",
-    description: "Close-up portrait of a Canada Goose gliding along the water, captured locally in Berkshire."
+    description: "Explore wildlife and natural landscapes captured across Berkshire."
   },
   {
     id: 2,
