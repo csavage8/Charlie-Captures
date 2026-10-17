@@ -1,25 +1,24 @@
 /* ==========================================================================
-   CHARLIE'S LENS - GALLERY MANAGEMENT SCRIPT (script.js)
+   CHARLIE'S LENS - GALLERY MANAGEMENT & BEFORE/AFTER SLIDER SCRIPT
    ========================================================================== */
 
-// 1. CONFIGURATION & SECURITY
-const ADMIN_PASSWORD = "Readingfc1871";
-
-// 2. MASTER PHOTO DATASET
-// Line 11: Add your photo details here using the image paths uploaded to GitHub
+// 1. MASTER PHOTO DATASET
+// Line 11: Add your edited photo in 'image' and raw/original in 'beforeImage'
 const myPhotos = [
   {
     id: 1,
     title: "Alpine Lake Reflection",
     category: "landscape",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
-    description: "Early morning reflection shot high up in the mountain trail."
+    beforeImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop&sat=-100", // Example unedited image
+    description: "Early morning reflection shot. Slide to compare the raw capture vs color-graded final."
   },
   {
     id: 2,
     title: "City Lights Rain",
     category: "street",
     image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop",
+    beforeImage: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop&sat=-80",
     description: "Neon reflections captured during a late evening downpour."
   },
   {
@@ -27,6 +26,7 @@ const myPhotos = [
     title: "Golden Hour Portrait",
     category: "portrait",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop",
+    beforeImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop&sat=-80",
     description: "Warm sunset portrait taken using natural window light."
   },
   {
@@ -34,25 +34,12 @@ const myPhotos = [
     title: "Misty Pine Forest",
     category: "landscape",
     image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+    beforeImage: "", // Leave blank if you don't have an unedited version
     description: "Fog rolling through the forest trees right after dawn."
-  },
-  {
-    id: 5,
-    title: "Urban Geometry",
-    category: "street",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-    description: "Low-angle architectural perspective highlighting shadows and symmetry."
-  },
-  {
-    id: 6,
-    title: "Northern Sky Glow",
-    category: "landscape",
-    image: "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=1200&auto=format&fit=crop",
-    description: "Night skies lit up over cold northern mountains."
   }
 ];
 
-// 3. RENDER GALLERY GRID
+// 2. RENDER GALLERY GRID
 function displayGallery(photos) {
   const grid = document.getElementById('gallery-grid');
   if (!grid) return;
@@ -69,6 +56,11 @@ function displayGallery(photos) {
         <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-mono px-2.5 py-1 rounded border border-brand-gold/20 uppercase tracking-widest">
           ${photo.category}
         </span>
+        ${photo.beforeImage ? `
+          <span class="absolute bottom-3 right-3 bg-brand-gold text-black text-[10px] font-bold font-mono px-2 py-0.5 rounded shadow">
+            SLIDER AVAILABLE
+          </span>
+        ` : ''}
       </div>
       <div class="p-5 flex items-center justify-between">
         <div>
@@ -84,7 +76,7 @@ function displayGallery(photos) {
   });
 }
 
-// 4. FILTER GALLERY BY CATEGORY
+// 3. FILTER GALLERY BY CATEGORY
 function filterCategory(category) {
   const buttons = document.querySelectorAll('.filter-btn');
   buttons.forEach(btn => {
@@ -105,40 +97,34 @@ function filterCategory(category) {
   }
 }
 
-// 5. AUTHENTICATED ADMIN FUNCTIONS
-function openAdmin() {
-  const pass = prompt("Enter Admin Password:");
-  if (pass === ADMIN_PASSWORD) {
-    document.getElementById('admin-modal').classList.remove('hidden');
-  } else if (pass !== null) {
-    alert("Incorrect Password!");
-  }
-}
-
-function closeAdmin() {
-  document.getElementById('admin-modal').classList.add('hidden');
-}
-
-function addPhoto(e) {
-  e.preventDefault();
-  
-  const newPhoto = {
-    id: Date.now(),
-    title: document.getElementById('admin-title').value,
-    category: document.getElementById('admin-category').value,
-    image: document.getElementById('admin-image').value,
-    description: document.getElementById('admin-desc').value
-  };
-
-  myPhotos.unshift(newPhoto);
-  displayGallery(myPhotos);
-  closeAdmin();
-  e.target.reset();
-}
-
-// 6. LIGHTBOX FUNCTIONS
+// 4. LIGHTBOX & BEFORE/AFTER SLIDER LOGIC
 function openLightbox(photo) {
-  document.getElementById('lightbox-img').src = photo.image;
+  const editedImg = document.getElementById('lightbox-img');
+  const beforeImg = document.getElementById('lightbox-before-img');
+  const beforeOverlay = document.getElementById('before-overlay');
+  const handle = document.getElementById('slider-handle');
+  const labelBefore = document.getElementById('label-before');
+  const labelAfter = document.getElementById('label-after');
+  const sliderInput = document.getElementById('slider-range');
+
+  editedImg.src = photo.image;
+  
+  if (photo.beforeImage) {
+    beforeImg.src = photo.beforeImage;
+    beforeOverlay.style.display = 'block';
+    handle.style.display = 'block';
+    labelBefore.style.display = 'block';
+    labelAfter.innerText = 'EDITED';
+    sliderInput.disabled = false;
+    updateSlider(50);
+  } else {
+    beforeOverlay.style.display = 'none';
+    handle.style.display = 'none';
+    labelBefore.style.display = 'none';
+    labelAfter.innerText = 'PHOTO';
+    sliderInput.disabled = true;
+  }
+
   document.getElementById('lightbox-tag').innerText = photo.category;
   document.getElementById('lightbox-title').innerText = photo.title;
   document.getElementById('lightbox-desc').innerText = photo.description;
@@ -146,11 +132,21 @@ function openLightbox(photo) {
   document.getElementById('lightbox').classList.remove('hidden');
 }
 
+function updateSlider(val) {
+  const beforeOverlay = document.getElementById('before-overlay');
+  const handle = document.getElementById('slider-handle');
+  
+  if (beforeOverlay && handle) {
+    beforeOverlay.style.width = val + '%';
+    handle.style.left = val + '%';
+  }
+}
+
 function closeLightbox() {
   document.getElementById('lightbox').classList.add('hidden');
 }
 
-// 7. MOBILE MENU TOGGLE
+// 5. MOBILE MENU TOGGLE
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
   if (menu) menu.classList.toggle('hidden');
