@@ -238,8 +238,6 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <!-- Camera Body -->
       <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
         <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
           <i class="fa-solid fa-camera"></i>
@@ -249,7 +247,6 @@
         <p class="text-xs text-gray-400 leading-relaxed">My go-to reliable camera body for street, portrait, and outdoor shooting.</p>
       </div>
 
-      <!-- Lenses -->
       <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
         <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
           <i class="fa-solid fa-circle-notch"></i>
@@ -259,7 +256,6 @@
         <p class="text-xs text-gray-400 leading-relaxed">Versatile 18-55mm VR lens for everyday shots plus telephoto zoom for long reach.</p>
       </div>
 
-      <!-- Memory & Power -->
       <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition-all">
         <div class="w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center text-2xl mb-4">
           <i class="fa-solid fa-sd-card"></i>
@@ -268,7 +264,6 @@
         <h3 class="text-lg font-bold text-white mb-1">Memory Cards & Power</h3>
         <p class="text-xs text-gray-400 leading-relaxed">High-speed Sony 32GB SD Cards and extra EN-EL14 Lithium-ion battery packs.</p>
       </div>
-
     </div>
   </section>
 
@@ -296,22 +291,22 @@
     </div>
   </section>
 
-  <!-- BEFORE / AFTER LIGHTBOX MODAL -->
+  <!-- FIXED SIZE BEFORE/AFTER LIGHTBOX MODAL -->
   <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
     <button onclick="closeLightbox()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-3xl z-50">
       <i class="fa-solid fa-xmark"></i>
     </button>
     <div class="max-w-4xl w-full bg-brand-card border border-brand-border rounded-2xl overflow-hidden shadow-2xl">
       
-      <!-- Interactive Comparison Slider Container -->
-      <div id="slider-wrapper" class="relative w-full h-[60vh] bg-black overflow-hidden select-none">
+      <!-- Fixed Aspect Slider Wrapper -->
+      <div id="slider-wrapper" class="relative w-full h-[60vh] bg-black overflow-hidden select-none flex items-center justify-center">
         
-        <!-- EDITED / AFTER IMAGE (Base image) -->
-        <img id="lightbox-img" src="" alt="Edited Photo" class="absolute inset-0 w-full h-full object-contain pointer-events-none">
+        <!-- EDITED / AFTER IMAGE (Base) -->
+        <img id="lightbox-img" src="" alt="Edited Photo" class="w-full h-full object-cover pointer-events-none">
         
-        <!-- UNEDITED / BEFORE IMAGE (Clipped overlay) -->
-        <div id="before-overlay" class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style="width: 50%;">
-          <img id="lightbox-before-img" src="" alt="Original Photo" class="absolute inset-0 w-full h-full object-contain max-w-none">
+        <!-- UNEDITED / BEFORE IMAGE (Clipped overlay pinned to same size) -->
+        <div id="before-overlay" class="absolute top-0 left-0 bottom-0 overflow-hidden pointer-events-none" style="width: 50%;">
+          <img id="lightbox-before-img" src="" alt="Original Photo" class="absolute top-0 left-0 w-full h-full object-cover max-w-none">
         </div>
 
         <!-- Before / After Labels -->
