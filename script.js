@@ -1,9 +1,6 @@
 /* ==========================================================================
-   CHARLIE'S LENS - GALLERY MANAGEMENT & ANIMATION LOGIC
+   CHARLIE'S LENS - GALLERY MANAGEMENT & ALBUMS SCRIPT
    ========================================================================== */
-
-// 1. MASTER PHOTO DATASET
-const fallbackNatureImg = "https://images.unsplash.com/photo-1548507214-41d3b07412f1?q=80&w=1200&auto=format&fit=crop";
 
 const myPhotos = [
   {
@@ -40,22 +37,19 @@ const myPhotos = [
   }
 ];
 
-// 2. RENDER GALLERY GRID WITH CARD ANIMATIONS
 function displayGallery(photos) {
   const grid = document.getElementById('gallery-grid');
   if (!grid) return;
   grid.innerHTML = '';
 
-  photos.forEach((photo, index) => {
+  photos.forEach(photo => {
     const card = document.createElement('div');
-    card.className = 'bg-brand-card border border-brand-border rounded-2xl overflow-hidden img-hover-container cursor-pointer hover:border-brand-gold/40 transition-all transform hover:-translate-y-1';
-    card.setAttribute('data-aos', 'fade-up');
-    card.setAttribute('data-aos-delay', (index * 100).toString());
+    card.className = 'bg-brand-card border border-brand-border rounded-2xl overflow-hidden img-hover-container cursor-pointer hover:border-brand-gold/40 transition-all';
     card.onclick = () => openLightbox(photo);
 
     card.innerHTML = `
       <div class="h-64 bg-black overflow-hidden relative">
-        <img src="${photo.image}" alt="${photo.title}" onerror="this.onerror=null; this.src='${fallbackNatureImg}';" class="w-full h-full object-cover">
+        <img src="${photo.image}" alt="${photo.title}" class="w-full h-full object-cover">
         <span class="absolute top-3 left-3 bg-brand-dark/80 text-brand-gold text-[10px] font-mono px-2.5 py-1 rounded border border-brand-gold/20 uppercase tracking-widest">
           ${photo.category}
         </span>
@@ -79,7 +73,6 @@ function displayGallery(photos) {
   });
 }
 
-// 3. FILTER GALLERY BY CATEGORY
 function filterCategory(category) {
   const buttons = document.querySelectorAll('.filter-btn');
   buttons.forEach(btn => {
@@ -100,7 +93,6 @@ function filterCategory(category) {
   }
 }
 
-// 4. LIGHTBOX & BEFORE/AFTER SLIDER LOGIC
 function openLightbox(photo) {
   const editedImg = document.getElementById('lightbox-img');
   const beforeImg = document.getElementById('lightbox-before-img');
@@ -112,11 +104,9 @@ function openLightbox(photo) {
   const wrapper = document.getElementById('slider-wrapper');
 
   editedImg.src = photo.image;
-  editedImg.onerror = () => { editedImg.src = fallbackNatureImg; };
-
+  
   if (photo.beforeImage) {
     beforeImg.src = photo.beforeImage;
-    beforeImg.onerror = () => { beforeImg.src = fallbackNatureImg; };
     beforeOverlay.style.display = 'block';
     handle.style.display = 'block';
     labelBefore.style.display = 'block';
@@ -160,20 +150,12 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.add('hidden');
 }
 
-// 5. MOBILE MENU TOGGLE
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
   if (menu) menu.classList.toggle('hidden');
 }
 
-// INITIAL LOAD
 window.onload = function() {
-  if (typeof AOS !== 'undefined') {
-    AOS.init({
-      duration: 800,
-      once: true
-    });
-  }
   displayGallery(myPhotos);
   const menuBtn = document.getElementById('mobile-menu-btn');
   if (menuBtn) {
